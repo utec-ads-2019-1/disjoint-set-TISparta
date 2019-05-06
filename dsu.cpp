@@ -26,13 +26,19 @@ private:
 
 public:
   
+  // El constructor es el equivalente a make_sets();
   DSU (int n): n(n) {
     for (int i = 0; i <= n; i++) {
       rng.seed(random_device()());
       dsu.push_back(new Node(i));
     }
   }
-  
+
+  ~DSU () {
+    for (Node* elem: dsu) delete elem;
+    dsu.clear();
+  }
+
   int find (int u) {
     assert(1 <= u and u <= n);
     return find(dsu[u]) -> id;

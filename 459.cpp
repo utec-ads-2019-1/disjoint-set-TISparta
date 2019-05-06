@@ -33,7 +33,12 @@ public:
       dsu.push_back(new Node(i));
     }
   }
-  
+
+  ~DSU () {
+    for (Node* elem: dsu) delete elem;
+    dsu.clear();
+  }
+
   int find (int u) {
     assert(0 <= u and u <= n);
     return find(dsu[u]) -> id;
